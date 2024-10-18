@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Measurement index{% endblock %}
+
+{% block body %}
+    <h1>Measurement index</h1>
+
+    <div class="table-responsive mb-4">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Celsius</th>
+                <th>Humidity</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for measurement in measurements %}
+                <tr>
+                    <td>{{ measurement.celsius }}</td>
+                    <td>{{ measurement.humidity }}</td>
+                    <td>
+                        <a href="{{ path('app_location_show', {'id': measurement.location.id}) }}">
+                            {{ measurement.location.city }}
+                        </a>
+                    </td>
+                    <td>{{ measurement.date|date('Y-m-d H:i') }}</td>
+                    <td>
+                        <a href="{{ path('app_measurement_edit', {'id': measurement.id}) }}">edit</a> |
+
+                        <form method="post" action="{{ path('app_measurement_delete', { id: measurement.id }) }}" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this measurement?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ measurement.id) }}">
+                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mb-4">
+        <a href="{{ path('app_measurement_new') }}" class="btn btn-primary">Create new</a>
+    </div>
+{% endblock %}

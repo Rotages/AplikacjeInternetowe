@@ -2,14 +2,10 @@
 
 namespace App\Repository;
 
-use App\Entity\Location;
 use App\Entity\Measurement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<Measurement>
- */
 class MeasurementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -17,14 +13,15 @@ class MeasurementRepository extends ServiceEntityRepository
         parent::__construct($registry, Measurement::class);
     }
 
-    public function findByLocation(Location $location)
+    // Existing methods...
+
+    public function findByCity(string $city): array
     {
-        $qb = $this->createQueryBuilder('m');
-        $qb->where('m.location = :location')
-            ->setParameter('location', $location);
-
-        $query = $qb->getQuery();
-        return $query->getResult();
+        return $this->createQueryBuilder('m')
+            ->innerJoin('m.location', 'l') // Assuming there's a relation to Location
+            ->where('l.city = :city')
+            ->setParameter('city', $city)
+            ->getQuery()
+            ->getResult();
     }
-
 }

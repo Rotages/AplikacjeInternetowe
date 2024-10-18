@@ -1,0 +1,20 @@
+# config/validator/Measurement.yaml
+App\Entity\Measurement:
+  properties:
+    celsius:
+      - NotBlank: null
+      - Type:
+          type: number
+    humidity:
+      - NotBlank: null
+      - Type:
+          type: number
+      - Range:
+          min: 0
+          max: 100
+    location:
+      - NotBlank: null
+    date:
+      - NotBlank: null
+      - Type:
+          type: \DateTime

@@ -1,0 +1,21 @@
+# config/validator/Location.yaml
+App\Entity\Location:
+  properties:
+    city:
+      - NotBlank: null
+      - Length:
+          min: 2
+          max: 255
+    country:
+      - NotBlank: null
+      - Length:
+          min: 2
+          max: 2
+    latitude:
+      - NotBlank: null
+      - Type:
+          type: number
+    longitude:
+      - NotBlank: null
+      - Type:
+          type: number

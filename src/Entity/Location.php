@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location
@@ -17,15 +18,29 @@ class Location
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "City cannot be blank.")]
     private ?string $city = null;
 
     #[ORM\Column(length: 2)]
+    #[Assert\NotBlank(message: "Country cannot be blank.")]
     private ?string $country = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 7)]
+    #[Assert\NotNull(message: "Latitude cannot be null.")]
+    #[Assert\Range(
+        min: -90,
+        max: 90,
+        notInRangeMessage: "Latitude must be between {{ min }} and {{ max }}.",
+    )]
     private ?string $latitude = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 7)]
+    #[Assert\NotNull(message: "Longitude cannot be null.")]
+    #[Assert\Range(
+        min: -180,
+        max: 180,
+        notInRangeMessage: "Longitude must be between {{ min }} and {{ max }}.",
+    )]
     private ?string $longitude = null;
 
     /**
@@ -113,7 +128,6 @@ class Location
     public function removeMeasurement(Measurement $measurement): static
     {
         if ($this->measurements->removeElement($measurement)) {
-            // set the owning side to null (unless already changed)
             if ($measurement->getLocation() === $this) {
                 $measurement->setLocation(null);
             }

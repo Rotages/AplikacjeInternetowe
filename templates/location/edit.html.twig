@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Location{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Edit Location</h1>
+
+        {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_label(form.city) }}
+            {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+            <div class="text-danger">
+                {{ form_errors(form.city) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.country) }}
+            {{ form_widget(form.country, {'attr': {'class': 'form-select'}}) }}
+            <div class="text-danger">
+                {{ form_errors(form.country) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.latitude) }}
+            {{ form_widget(form.latitude, {'attr': {'class': 'form-control'}}) }}
+            <div class="text-danger">
+                {{ form_errors(form.latitude) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.longitude) }}
+            {{ form_widget(form.longitude, {'attr': {'class': 'form-control'}}) }}
+            <div class="text-danger">
+                {{ form_errors(form.longitude) }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ path('app_location_index') }}" class="btn btn-secondary">back to list</a>
+        {{ form_end(form) }}
+
+        <form method="post" action="{{ path('app_location_delete', { id: location.id }) }}" onsubmit="return confirm('Are you sure?');">
+            <button class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+{% endblock %}

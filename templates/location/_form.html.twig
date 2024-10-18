@@ -1,0 +1,36 @@
+{# location/_form.html.twig #}
+{{ form_start(form) }}
+<div class="mb-3">
+    {{ form_label(form.city) }}
+    {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+    <div class="text-danger">
+        {{ form_errors(form.city) }}
+    </div>
+</div>
+
+<div class="mb-3">
+    {{ form_label(form.country) }}
+    {{ form_widget(form.country, {'attr': {'class': 'form-select'}}) }}
+    <div class="text-danger">
+        {{ form_errors(form.country) }}
+    </div>
+</div>
+
+<div class="mb-3">
+    {{ form_label(form.latitude) }}
+    {{ form_widget(form.latitude, {'attr': {'class': 'form-control'}}) }}
+    <div class="text-danger">
+        {{ form_errors(form.latitude) }}
+    </div>
+</div>
+
+<div class="mb-3">
+    {{ form_label(form.longitude) }}
+    {{ form_widget(form.longitude, {'attr': {'class': 'form-control'}}) }}
+    <div class="text-danger">
+        {{ form_errors(form.longitude) }}
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary">Save</button>
+{{ form_end(form) }}

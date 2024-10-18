@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Measurement{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Create New Measurement</h1>
+
+        {{ form_start(form) }}
+
+        <div class="mb-3">
+            {{ form_label(form.celsius) }}
+            {{ form_widget(form.celsius, {'attr': {'class': 'form-control'}}) }}
+            <div class="text-danger">
+                {{ form_errors(form.celsius) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.humidity) }}
+            {{ form_widget(form.humidity, {'attr': {'class': 'form-control'}}) }}
+            <div class="text-danger">
+                {{ form_errors(form.humidity) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.location) }}
+            {{ form_widget(form.location, {'attr': {'class': 'form-select'}}) }}
+            <div class="text-danger">
+                {{ form_errors(form.location) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.date) }}
+            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+            <div class="text-danger">
+                {{ form_errors(form.date) }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a href="{{ path('app_measurement_index') }}" class="btn btn-secondary">Back to list</a>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
