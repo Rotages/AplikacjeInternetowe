@@ -1,0 +1,21 @@
+{% block body %}
+    <style>
+        body {
+            background: url("https://placehold.co/100x100/FFFFFF/EFEFEF/png?text=52580");
+        }
+    </style>
+
+    <main>
+        <h1>Weather in {{ location.city }}, {{ location.country }}</h1>
+
+        <ul>
+            {% if measurements is empty %}
+                <li>No measurements found for this location.</li>
+            {% else %}
+                {% for measurement in measurements %}
+                    <li>{{ measurement.date|date('d.m.Y') }}: {{ measurement.celsius }}&deg;C, Humidity: {{ measurement.humidity }}%</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </main>
+{% endblock %}
