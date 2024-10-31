@@ -6,6 +6,15 @@
     <div class="container">
         <h1>Edit Location</h1>
 
+        <!-- Dodanie linku do wylogowania -->
+        <div class="mb-4">
+            {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-danger" href="{{ path('app_logout') }}">Logout</a>
+            {% else %}
+                <a class="btn btn-primary" href="{{ path('app_login') }}">Login</a>
+            {% endif %}
+        </div>
+
         {{ form_start(form) }}
         <div class="mb-3">
             {{ form_label(form.city) }}

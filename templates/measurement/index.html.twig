@@ -42,6 +42,8 @@
     </div>
 
     <div class="mb-4">
-        <a href="{{ path('app_measurement_new') }}" class="btn btn-primary">Create new</a>
+        {% if is_granted('ROLE_MEASUREMENT_NEW') %}
+            <a href="{{ path('app_measurement_new') }}">Dodaj nowy pomiar</a>
+        {% endif %}
     </div>
 {% endblock %}
